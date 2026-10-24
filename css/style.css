@@ -526,6 +526,7 @@ ul, ol { padding: 0; list-style: none; }
   text-align: right;
 }
 .price-list li { white-space: nowrap; }
+.price-list .price-label:last-child { margin-right: 0; }
 .price-list .price-label {
   margin-right: 8px;
   color: var(--muted);
