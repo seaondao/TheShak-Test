@@ -256,15 +256,12 @@ ul, ol { padding: 0; list-style: none; }
   background: var(--cream-2);
 }
 
-/* On phones, zoom in a little so the building fills the frame. */
 .hero-photo {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
-  height: 122%;
+  height: 100%;
   object-fit: cover;
-  object-position: 50% 0;
 }
 
 .hero-circle {
@@ -670,7 +667,6 @@ ul, ol { padding: 0; list-style: none; }
   .btn { font-size: 16px; }
 
   .hero { height: 800px; }
-  .hero-photo { height: 100%; object-position: 50% 62%; }
   .hero-circle {
     top: 162px;
     left: -27px;
