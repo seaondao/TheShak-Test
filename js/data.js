@@ -10,7 +10,7 @@
  * {
  *   settings: { showPrices, currency },
  *   categories: [{
- *     id, name, note, image,
+ *     id, name, navLabel, tagline, note, image,
  *     prices: [{ label, amount }],          // category-wide sizes (Dirty Sodas, Refreshers, Sides)
  *     items: [{
  *       id, number, name, badge, description, base,
@@ -74,6 +74,8 @@
       return {
         id: text(row.id),
         name: text(row.name),
+        navLabel: text(row.navLabel) || text(row.name),
+        tagline: text(row.tagline),
         note: text(row.note),
         image: text(row.image) || null,
         prices: prices(row),

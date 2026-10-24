@@ -18,97 +18,127 @@
     return node;
   }
 
-  function priceEl(amount, prefix) {
-    return el("span", "price", (prefix || "") + price(amount));
+  function samePrices(a, b) {
+    return JSON.stringify(a) === JSON.stringify(b);
   }
 
-  // "16 oz $6 · 24 oz $8" for category sizes, "$1.50 each" for one unlabeled price.
-  function renderCatPrices(prices) {
-    var meta = el("p", "cat-meta");
-    prices.forEach(function (p) {
-      var part = el("span");
-      if (p.label) part.appendChild(document.createTextNode(p.label + (showPrices ? " " : "")));
-      if (showPrices) part.appendChild(priceEl(p.amount));
-      if (!p.label && prices.length === 1) part.appendChild(document.createTextNode(" each"));
-      if (part.textContent.trim()) meta.appendChild(part);
-    });
-    return meta.childNodes.length ? meta : null;
+  // When every item in a category has the same sizes (the açaí bowls),
+  // show them once in the category line instead of on every item.
+  function sharedItemPrices(cat) {
+    if (cat.prices.length || !cat.items.length) return null;
+    var first = cat.items[0].prices;
+    if (!first.length) return null;
+    var all = cat.items.every(function (item) { return samePrices(item.prices, first); });
+    return all ? first : null;
   }
 
-  function renderItemPrices(prices) {
+  // "16 oz $6 · 24 oz $8", or "$1.50 each" for one unlabeled price.
+  function priceLine(prices) {
+    if (prices.length === 1 && !prices[0].label) {
+      return showPrices ? price(prices[0].amount) + " each" : "";
+    }
+    return prices.map(function (p) {
+      return showPrices ? p.label + " " + price(p.amount) : p.label;
+    }).join(" · ");
+  }
+
+  // Right side of an item row: "$15" or "Single Scoop $3 / Double Scoop $5".
+  function itemPrice(prices) {
     if (!prices.length) return null;
     if (prices.length === 1 && !prices[0].label) {
       return showPrices ? el("p", "price", price(prices[0].amount)) : null;
     }
-    var list = el("ul", "price-list");
-    prices.forEach(function (p) {
-      var li = el("li");
-      li.appendChild(el("span", "price-label", p.label));
-      if (showPrices) li.appendChild(priceEl(p.amount));
-      list.appendChild(li);
-    });
-    return list;
+    var text = prices.map(function (p) {
+      return showPrices ? p.label + " " + price(p.amount) : p.label;
+    }).join(" / ");
+    return el("p", showPrices ? "price" : "price-label", text);
   }
 
-  function detail(label, text) {
-    var p = el("p", "item-detail");
-    if (label) {
-      p.appendChild(el("strong", null, label + ": "));
-    }
-    p.appendChild(document.createTextNode(text));
-    return p;
+  // Dirty sodas lead with the soda: "Mountain Dew · Strawberry Syrup, Mango Syrup, Pineapple Juice".
+  function ingredientsText(item) {
+    if (!item.ingredients.length) return "";
+    if (!item.base) return item.ingredients.join(", ");
+    var rest = item.ingredients.filter(function (x) { return x !== item.base; });
+    return item.base + (rest.length ? " · " + rest.join(", ") : "");
   }
 
-  function renderItem(item) {
-    var article = el("article", "menu-item");
-    var head = el("div", "item-head");
-    var name = el("h3", "item-name item-title");
-    if (item.number !== null) name.appendChild(el("span", "item-number", "#" + item.number));
-    name.appendChild(el("span", null, item.name));
+  function isPlain(item) {
+    return !item.description && !item.prices.length && !item.badge && item.number === null &&
+      !item.ingredients.length && !item.options && !item.includes;
+  }
+
+  function renderItem(item, hidePrices) {
+    var row = el("div", "menu-item");
+    var head = el("div", "menu-item-head");
+    var name = el("h3", "menu-item-name", (item.number !== null ? item.number + " " : "") + item.name);
     if (item.badge) name.appendChild(el("span", "badge", item.badge));
     head.appendChild(name);
-    var prices = renderItemPrices(item.prices);
-    if (prices) head.appendChild(prices);
-    article.appendChild(head);
+    var right = hidePrices ? null : itemPrice(item.prices);
+    if (right) head.appendChild(right);
+    row.appendChild(head);
 
-    if (item.description) article.appendChild(el("p", "item-desc", item.description));
-    if (item.includes) article.appendChild(detail("Includes", item.includes));
-    if (item.options) article.appendChild(detail(item.options.label, item.options.choices.join(", ")));
-    if (item.ingredients.length) article.appendChild(el("p", "item-desc", item.ingredients.join(", ")));
-    if (item.toppedWith.length) article.appendChild(detail("Topped with", item.toppedWith.join(", ")));
-    return article;
+    var desc = item.description || ingredientsText(item);
+    if (desc) row.appendChild(el("p", "menu-item-desc", desc));
+    if (item.options) {
+      row.appendChild(el("p", "menu-item-sub", item.options.label + ": " + item.options.choices.join(", ")));
+    }
+    if (item.toppedWith.length) {
+      row.appendChild(el("p", "menu-item-sub", "Topped with " + item.toppedWith.join(", ")));
+    }
+    return row;
   }
 
-  function renderExtras(groups) {
-    var wrap = el("div", "extras");
-    groups.forEach(function (g) {
-      var box = el("div");
-      box.appendChild(el("h3", null, g.group));
-      var ul = el("ul");
-      g.items.forEach(function (x) {
-        var li = el("li", null, x.name);
-        if (showPrices && x.amount !== null) li.appendChild(priceEl(x.amount, "+"));
-        ul.appendChild(li);
-      });
-      box.appendChild(ul);
-      wrap.appendChild(box);
+  // Items with only a name (sides) share one row: "Mild Sauce · Hot Sauce · …".
+  function renderPlainItems(items, note) {
+    var row = el("div", "menu-item");
+    row.appendChild(el("h3", "menu-item-name", items.map(function (i) { return i.name; }).join(" · ")));
+    if (note) row.appendChild(el("p", "menu-item-desc", note));
+    return row;
+  }
+
+  function chipList(names) {
+    var ul = el("ul", "chips");
+    names.forEach(function (n) { ul.appendChild(el("li", null, n)); });
+    return ul;
+  }
+
+  function extraText(x) {
+    return x.name + (showPrices && x.amount !== null ? " +" + price(x.amount) : "");
+  }
+
+  function isPricedGroup(g) {
+    return g.items.some(function (x) { return x.amount !== null; });
+  }
+
+  function renderByoCard(item, extras) {
+    var card = el("div", "byo-card");
+    card.appendChild(el("h3", null, item.name));
+    var text = "Includes: " + item.includes + ".";
+    extras.filter(isPricedGroup).forEach(function (g) {
+      text += " " + g.items.map(extraText).join(", ") + ".";
     });
-    return wrap;
+    card.appendChild(el("p", null, text));
+    extras.filter(function (g) { return !isPricedGroup(g); }).forEach(function (g) {
+      card.appendChild(el("h4", null, g.group));
+      card.appendChild(chipList(g.items.map(function (x) { return x.name; })));
+    });
+    return card;
   }
 
   function renderCategory(cat) {
-    var section = el("section", "menu-cat");
-    section.id = cat.id;
-    section.setAttribute("aria-labelledby", cat.id + "-title");
-    var wrap = el("div", "wrap");
+    var article = el("article", "menu-cat");
+    article.id = cat.id;
+    article.setAttribute("aria-labelledby", cat.id + "-title");
 
     var head = el("div", "menu-cat-head");
     var title = el("h2", "title", cat.name);
     title.id = cat.id + "-title";
     head.appendChild(title);
-    var meta = renderCatPrices(cat.prices);
-    if (meta) head.appendChild(meta);
-    if (cat.note) head.appendChild(el("p", "cat-meta", cat.note));
+    if (cat.tagline) head.appendChild(el("p", "cat-tagline", cat.tagline));
+    var shared = sharedItemPrices(cat);
+    head.appendChild(el("p", "cat-prices", priceLine(cat.prices.length ? cat.prices : shared || [])));
+    article.appendChild(head);
+
     if (cat.image) {
       var photo = el("div", "menu-cat-photo");
       var img = el("img");
@@ -116,36 +146,90 @@
       img.alt = cat.name;
       img.loading = "lazy";
       photo.appendChild(img);
-      head.appendChild(photo);
+      article.appendChild(photo);
     }
-    wrap.appendChild(head);
 
-    var body = el("div", "menu-cat-body");
-    if (cat.items.length) {
-      var grid = el("div", "menu-items menu-item-grid");
-      cat.items.forEach(function (item) { grid.appendChild(renderItem(item)); });
-      body.appendChild(grid);
+    var byo = cat.items.filter(function (i) { return i.includes; })[0];
+    var regular = cat.items.filter(function (i) { return i !== byo && !isPlain(i); });
+    var plain = cat.items.filter(isPlain);
+
+    if (regular.length || plain.length) {
+      var list = el("div", "menu-items");
+      regular.forEach(function (item) { list.appendChild(renderItem(item, !!shared)); });
+      if (plain.length) list.appendChild(renderPlainItems(plain, cat.note));
+      article.appendChild(list);
     }
-    if (cat.extras.length) body.appendChild(renderExtras(cat.extras));
-    wrap.appendChild(body);
 
-    section.appendChild(wrap);
-    return section;
+    if (byo) {
+      article.appendChild(renderByoCard(byo, cat.extras));
+    } else {
+      cat.extras.forEach(function (g) {
+        if (isPricedGroup(g)) {
+          var line = el("p", "addons");
+          g.items.forEach(function (x) { line.appendChild(el("span", null, extraText(x))); });
+          article.appendChild(line);
+        } else {
+          var group = el("div", "chip-group");
+          group.appendChild(el("h3", null, g.group));
+          group.appendChild(chipList(g.items.map(function (x) { return x.name; })));
+          article.appendChild(group);
+        }
+      });
+    }
+    if (cat.note && !plain.length) article.appendChild(el("p", "menu-item-sub", cat.note));
+    return article;
+  }
+
+  // Highlight the chip for the section at the top of the screen.
+  var chips = [];
+  var lockSpy = 0;
+
+  function setActive(id) {
+    chips.forEach(function (a) { a.classList.toggle("is-active", a.hash === "#" + id); });
+  }
+
+  function spy() {
+    if (Date.now() < lockSpy) return;
+    var limit = (jump.getBoundingClientRect().bottom || 0) + 40;
+    var current = chips.length ? chips[0].hash.slice(1) : null;
+    var bestTop = -Infinity;
+    chips.forEach(function (a) {
+      var section = document.getElementById(a.hash.slice(1));
+      var top = section.getBoundingClientRect().top;
+      if (top <= limit && top > bestTop) { bestTop = top; current = section.id; }
+    });
+    if (current) setActive(current);
   }
 
   ShackData.load().then(function (menu) {
     showPrices = menu.settings.showPrices;
     root.textContent = "";
     jumpList.textContent = "";
+
+    for (var i = 0; i < menu.categories.length; i += 2) {
+      var row = el("section", "menu-row");
+      var grid = el("div", "wrap menu-row-grid");
+      menu.categories.slice(i, i + 2).forEach(function (cat) { grid.appendChild(renderCategory(cat)); });
+      row.appendChild(grid);
+      root.appendChild(row);
+    }
+
     menu.categories.forEach(function (cat) {
-      root.appendChild(renderCategory(cat));
       var li = el("li");
-      var a = el("a", null, cat.name);
+      var a = el("a", null, cat.navLabel);
       a.href = "#" + cat.id;
+      a.addEventListener("click", function () {
+        lockSpy = Date.now() + 900;
+        setActive(cat.id);
+      });
       li.appendChild(a);
       jumpList.appendChild(li);
+      chips.push(a);
     });
     jump.hidden = false;
+    setActive(menu.categories[0] && menu.categories[0].id);
+    window.addEventListener("scroll", function () { window.requestAnimationFrame(spy); }, { passive: true });
+
     // The printed menu shows prices, so it is hidden when prices are off.
     if (printedLink) printedLink.hidden = !showPrices;
     if (location.hash) {

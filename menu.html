@@ -42,20 +42,23 @@
   <main>
     <section class="menu-intro" aria-labelledby="page-title">
       <div class="wrap">
-        <p class="eyebrow">The menu</p>
-        <h1 class="title title--xl" id="page-title">All the good stuff.</h1>
-        <!-- PLACEHOLDER COPY: replace with the owner's own words. -->
-        <p class="lede">Burritos, açaí bowls, dirty sodas and more, all from the little red shack in Laie.</p>
-        <!-- Hidden until the data loads; stays hidden when prices are turned off, since the printed menu shows prices. -->
-        <a class="text-link" href="imgs/fullMenue.png" data-printed-menu hidden>
-          View printed menu
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.9-4.9M10.5 7.5v6M7.5 10.5h6"/></svg>
-        </a>
+        <p class="eyebrow">The menu · L-Town, Oahu</p>
+        <h1 class="title title--xl" id="page-title">The good stuff.</h1>
+        <div class="menu-intro-row">
+          <p class="lede">Big bites. Cool bowls. A little aloha.</p>
+          <!-- Hidden until the data loads; stays hidden when prices are turned off, since the printed menu shows prices. -->
+          <a class="text-link" href="imgs/fullMenue.png" data-printed-menu hidden>
+            View printed menu
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
       </div>
     </section>
 
     <nav class="menu-jump" aria-label="Menu sections" hidden>
-      <ul data-menu-jump></ul>
+      <div class="wrap">
+        <ul data-menu-jump></ul>
+      </div>
     </nav>
 
     <!-- Every category and item is rendered from menu data by js/menu.js. -->

@@ -1,14 +1,14 @@
 {
   "settings": {"showPrices": true, "currency": "USD"},
   "categories": [
-    {"id": "burritos", "name": "Burritos", "note": "", "image": "imgs/breakfastBurrito.png", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
-    {"id": "acai-bowls", "name": "Açaí Bowls", "note": "", "image": "imgs/acai.png", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
-    {"id": "dirty-sodas", "name": "Dirty Sodas", "note": "", "image": "", "priceLabel1": "16 oz", "price1": 6, "priceLabel2": "24 oz", "price2": 8},
-    {"id": "fries", "name": "Fries", "note": "", "image": "imgs/crazyFries.png", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
-    {"id": "quesadillas", "name": "Quesadillas", "note": "", "image": "", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
-    {"id": "ice-cream", "name": "Ice Cream", "note": "", "image": "", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
-    {"id": "refreshers", "name": "Refreshers", "note": "", "image": "", "priceLabel1": "24 oz", "price1": 6, "priceLabel2": "32 oz", "price2": 8},
-    {"id": "sides-sauces", "name": "Sides & Sauces", "note": "All sides come in 2 oz containers", "image": "", "priceLabel1": "", "price1": 1.5, "priceLabel2": "", "price2": ""}
+    {"id": "burritos", "name": "Burritos", "navLabel": "Burritos", "tagline": "Wrapped big. Made for a serious appetite.", "note": "", "image": "imgs/breakfastBurrito.png", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
+    {"id": "acai-bowls", "name": "Açaí Bowls", "navLabel": "Açaí", "tagline": "A cool bowl for an island day.", "note": "", "image": "imgs/acai.png", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
+    {"id": "dirty-sodas", "name": "Dirty Sodas", "navLabel": "Dirty Sodas", "tagline": "Your favorite soda, with an island twist.", "note": "", "image": "", "priceLabel1": "16 oz", "price1": 6, "priceLabel2": "24 oz", "price2": 8},
+    {"id": "fries", "name": "Fries", "navLabel": "Fries", "tagline": "Grab a fork. Or a friend.", "note": "", "image": "imgs/crazyFries.png", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
+    {"id": "quesadillas", "name": "Quesadillas", "navLabel": "Quesadillas", "tagline": "Golden tortilla. Melty middle.", "note": "", "image": "", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
+    {"id": "ice-cream", "name": "Ice Cream", "navLabel": "Ice Cream", "tagline": "A sweet little finish.", "note": "", "image": "", "priceLabel1": "", "price1": "", "priceLabel2": "", "price2": ""},
+    {"id": "refreshers", "name": "Refreshers", "navLabel": "Refreshers", "tagline": "Bright, fruity & poured over ice.", "note": "", "image": "", "priceLabel1": "24 oz", "price1": 6, "priceLabel2": "32 oz", "price2": 8},
+    {"id": "sides-sauces", "name": "Sides & Sauces", "navLabel": "Sides", "tagline": "A little extra on the side.", "note": "All sides come in 2 oz containers", "image": "", "priceLabel1": "", "price1": 1.5, "priceLabel2": "", "price2": ""}
   ],
   "items": [
     {"id": "cali-burrito", "category": "burritos", "number": "", "name": "Cali Burrito", "badge": "Most Popular", "description": "Crispy fries, melted cheese, steak, special Tolu sauce", "base": "", "ingredients": "", "toppedWith": "", "optionLabel": "", "options": "", "includes": "", "priceLabel1": "", "price1": 15, "priceLabel2": "", "price2": "", "image": ""},
