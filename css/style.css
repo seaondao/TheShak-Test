@@ -756,7 +756,7 @@ ul, ol { padding: 0; list-style: none; }
   .menu-item .price { font-size: 19px; }
   .extras { grid-template-columns: repeat(2, 1fr); gap: 28px 40px; }
 
-  .coming-soon { padding: 120px 0 140px; }
+  .coming-soon { min-height: 60vh; padding: 120px 0 140px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
