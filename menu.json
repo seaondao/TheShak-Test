@@ -1,0 +1,517 @@
+{
+  "settings": {
+    "showPrices": true,
+    "currency": "USD"
+  },
+  "categoryImage": {
+    "burritos": "imgs/breakfastBurrito.png",
+    "acai-bowls": "imgs/acai.png",
+    "fries": "imgs/crazyFries.png"
+  },
+  "categories": [
+    {
+      "id": "burritos",
+      "name": "Burritos",
+      "items": [
+        {
+          "id": "cali-burrito",
+          "name": "Cali Burrito",
+          "badge": "Most Popular",
+          "description": "Crispy fries, melted cheese, steak, special Tolu sauce",
+          "prices": [
+            {
+              "label": "",
+              "amount": 15
+            }
+          ],
+          "image": null
+        },
+        {
+          "id": "breakfast-burrito",
+          "name": "Breakfast Burrito",
+          "badge": null,
+          "description": "Eggs, melted cheese, crispy fries, Tolu sauce and choice of meat",
+          "options": {
+            "label": "Choice of meat",
+            "choices": [
+              "Bacon",
+              "Spam",
+              "Portuguese Sausage"
+            ]
+          },
+          "prices": [
+            {
+              "label": "",
+              "amount": 13
+            }
+          ],
+          "image": null
+        },
+        {
+          "id": "no-meat-burrito",
+          "name": "No Meat Burrito",
+          "badge": null,
+          "description": "Eggs, melted cheese, crispy fries and Tolu sauce",
+          "prices": [
+            {
+              "label": "",
+              "amount": 11
+            }
+          ],
+          "image": null
+        }
+      ],
+      "addOns": [
+        {
+          "name": "Add Steak",
+          "amount": 2
+        },
+        {
+          "name": "Add Cheese Wrap",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "acai-bowls",
+      "name": "Açaí Bowls",
+      "items": [
+        {
+          "id": "sunset-surf",
+          "name": "Sunset Surf",
+          "badge": null,
+          "description": "Banana, strawberry, chocolate chips, granola, peanut butter drizzle",
+          "prices": [
+            {
+              "label": "Keiki Bowl (12 oz)",
+              "amount": 11
+            },
+            {
+              "label": "Large Bowl (24 oz)",
+              "amount": 15
+            }
+          ],
+          "image": null
+        },
+        {
+          "id": "turtle-bay",
+          "name": "Turtle Bay",
+          "badge": null,
+          "description": "Pineapple, kiwi, coconut flakes, granola, condensed milk drizzle",
+          "prices": [
+            {
+              "label": "Keiki Bowl (12 oz)",
+              "amount": 11
+            },
+            {
+              "label": "Large Bowl (24 oz)",
+              "amount": 15
+            }
+          ],
+          "image": null
+        },
+        {
+          "id": "sharks-cove",
+          "name": "Sharks Cove",
+          "badge": null,
+          "description": "Raspberry, blueberry, banana, granola, Nutella drizzle",
+          "prices": [
+            {
+              "label": "Keiki Bowl (12 oz)",
+              "amount": 11
+            },
+            {
+              "label": "Large Bowl (24 oz)",
+              "amount": 15
+            }
+          ],
+          "image": null
+        }
+      ],
+      "buildYourOwn": {
+        "sizes": [
+          {
+            "label": "Keiki Bowl (12 oz)",
+            "amount": 11
+          },
+          {
+            "label": "Large Bowl (24 oz)",
+            "amount": 15
+          }
+        ],
+        "includes": "Granola, 2 toppings, 1 drizzle",
+        "extraTopping": 1,
+        "toppings": [
+          "Banana",
+          "Strawberry",
+          "Blueberry",
+          "Raspberry",
+          "Pineapple",
+          "Kiwi",
+          "Coconut Flakes",
+          "Almond Slices",
+          "Chocolate Chips",
+          "Cacao Nibs",
+          "Chia Seeds"
+        ],
+        "drizzles": [
+          "Honey",
+          "Peanut Butter",
+          "Coconut Cream",
+          "Nutella",
+          "Condensed Milk",
+          "Almond Butter"
+        ]
+      }
+    },
+    {
+      "id": "dirty-sodas",
+      "name": "Dirty Sodas",
+      "sizes": [
+        {
+          "label": "16 oz",
+          "amount": 6
+        },
+        {
+          "label": "24 oz",
+          "amount": 8
+        }
+      ],
+      "items": [
+        {
+          "id": "vili",
+          "number": 1,
+          "name": "Vili",
+          "badge": "Best Seller",
+          "base": "Mountain Dew",
+          "ingredients": [
+            "Strawberry Syrup",
+            "Mango Syrup",
+            "Pineapple Juice",
+            "Mountain Dew"
+          ],
+          "toppedWith": [
+            "French Vanilla Cold Foam Creamer"
+          ],
+          "image": null
+        },
+        {
+          "id": "rustin",
+          "number": 2,
+          "name": "Rustin",
+          "badge": null,
+          "base": "Dr Pepper",
+          "ingredients": [
+            "Coconut Creamer",
+            "Lime Juice",
+            "Dr Pepper"
+          ],
+          "toppedWith": [
+            "French Vanilla Cold Foam Creamer"
+          ],
+          "image": null
+        },
+        {
+          "id": "hea",
+          "number": 3,
+          "name": "Hea",
+          "badge": null,
+          "base": "Orange Fanta",
+          "ingredients": [
+            "Marshmallow Cream Wall",
+            "Strawberry Syrup",
+            "French Vanilla Syrup",
+            "Orange Fanta"
+          ],
+          "toppedWith": [
+            "Half & Half",
+            "Marshmallow Cream"
+          ],
+          "image": null
+        },
+        {
+          "id": "nalei",
+          "number": 4,
+          "name": "Nalei",
+          "badge": null,
+          "base": "Sprite",
+          "ingredients": [
+            "Lavender Syrup",
+            "Coconut Syrup",
+            "Pineapple Juice",
+            "Sprite"
+          ],
+          "toppedWith": [
+            "Coconut Milk",
+            "Coconut Syrup"
+          ],
+          "image": null
+        },
+        {
+          "id": "saione",
+          "number": 5,
+          "name": "Saione",
+          "badge": null,
+          "base": "Pepsi",
+          "ingredients": [
+            "Cherry Syrup",
+            "French Vanilla Syrup",
+            "Pepsi"
+          ],
+          "toppedWith": [
+            "French Vanilla Cold Foam Creamer"
+          ],
+          "image": null
+        },
+        {
+          "id": "alohi",
+          "number": 6,
+          "name": "Alohi",
+          "badge": null,
+          "base": "Sprite",
+          "ingredients": [
+            "Cherry Syrup",
+            "Fresh Lime Juice",
+            "Coconut Syrup",
+            "Sprite"
+          ],
+          "toppedWith": [
+            "French Vanilla Cold Foam Creamer"
+          ],
+          "image": null
+        },
+        {
+          "id": "alii",
+          "number": 7,
+          "name": "Aliʻi",
+          "badge": null,
+          "base": "Sprite",
+          "ingredients": [
+            "Watermelon Syrup",
+            "French Vanilla Syrup",
+            "Sprite"
+          ],
+          "toppedWith": [
+            "Green Apple Cold Foam",
+            "Half & Half",
+            "Green Apple Syrup"
+          ],
+          "image": null
+        },
+        {
+          "id": "kahi",
+          "number": 8,
+          "name": "Kahi",
+          "badge": null,
+          "base": "Root Beer",
+          "ingredients": [
+            "Marshmallow Cream Wall",
+            "Root Beer",
+            "Toasted Marshmallow Syrup",
+            "White Chocolate Syrup"
+          ],
+          "toppedWith": [
+            "Coconut Milk",
+            "Coconut Syrup"
+          ],
+          "image": null
+        },
+        {
+          "id": "oaks",
+          "number": 9,
+          "name": "Oaks",
+          "badge": null,
+          "base": "Dr Pepper",
+          "ingredients": [
+            "Coconut Syrup",
+            "Pineapple Juice",
+            "French Vanilla Syrup",
+            "Dr Pepper"
+          ],
+          "toppedWith": [
+            "Coconut Creamer"
+          ],
+          "image": null
+        },
+        {
+          "id": "heihei",
+          "number": 10,
+          "name": "HeiHei",
+          "badge": "Best Seller",
+          "base": "Sprite",
+          "ingredients": [
+            "Marshmallow Cream Wall",
+            "Blue Raspberry Syrup",
+            "Coconut Syrup",
+            "Pineapple Juice",
+            "Sprite"
+          ],
+          "toppedWith": [
+            "French Vanilla Cold Foam Creamer"
+          ],
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "fries",
+      "name": "Fries",
+      "items": [
+        {
+          "id": "crispy-fries",
+          "name": "Crispy Fries",
+          "badge": null,
+          "description": "",
+          "prices": [
+            {
+              "label": "",
+              "amount": 4
+            }
+          ],
+          "image": null
+        },
+        {
+          "id": "carne-asada-fries",
+          "name": "Carne Asada Fries",
+          "badge": null,
+          "description": "Steak, cheese, homemade guacamole, sour cream, spicy mayo",
+          "prices": [
+            {
+              "label": "",
+              "amount": 18.5
+            }
+          ],
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "quesadillas",
+      "name": "Quesadillas",
+      "items": [
+        {
+          "id": "cheese-quesadilla",
+          "name": "Cheese",
+          "badge": null,
+          "description": "",
+          "prices": [
+            {
+              "label": "",
+              "amount": 6
+            }
+          ],
+          "image": null
+        },
+        {
+          "id": "meat-quesadilla",
+          "name": "Bacon / Spam / Portuguese Sausage",
+          "badge": null,
+          "description": "",
+          "prices": [
+            {
+              "label": "",
+              "amount": 9
+            }
+          ],
+          "image": null
+        },
+        {
+          "id": "steak-quesadilla",
+          "name": "Steak",
+          "badge": null,
+          "description": "",
+          "prices": [
+            {
+              "label": "",
+              "amount": 10
+            }
+          ],
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "ice-cream",
+      "name": "Ice Cream",
+      "items": [
+        {
+          "id": "ice-cream",
+          "name": "Ice Cream",
+          "badge": null,
+          "description": "",
+          "prices": [
+            {
+              "label": "Single Scoop",
+              "amount": 3
+            },
+            {
+              "label": "Double Scoop",
+              "amount": 5
+            }
+          ],
+          "image": null
+        },
+        {
+          "id": "ube-ice-cream",
+          "name": "Ube Ice Cream",
+          "badge": null,
+          "description": "",
+          "prices": [
+            {
+              "label": "Single Scoop",
+              "amount": 3
+            },
+            {
+              "label": "Double Scoop",
+              "amount": 6
+            }
+          ],
+          "image": null
+        }
+      ],
+      "flavors": [
+        "Strawberry",
+        "Cookies N Cream",
+        "Haupia",
+        "Chocolate",
+        "Kona Coffee",
+        "Ube"
+      ]
+    },
+    {
+      "id": "refreshers",
+      "name": "Refreshers",
+      "sizes": [
+        {
+          "label": "24 oz",
+          "amount": 6
+        },
+        {
+          "label": "32 oz",
+          "amount": 8
+        }
+      ],
+      "flavors": [
+        "Melona",
+        "Strawberry",
+        "Mango",
+        "Pineapple"
+      ],
+      "image": null
+    },
+    {
+      "id": "sides-sauces",
+      "name": "Sides & Sauces",
+      "note": "All sides come in 2 oz containers",
+      "price": 1.5,
+      "items": [
+        "Mild Sauce",
+        "Hot Sauce",
+        "Guacamole",
+        "Sour Cream",
+        "Sriracha Mayo"
+      ],
+      "image": null
+    }
+  ]
+}

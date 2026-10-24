@@ -1,0 +1,26 @@
+# Design references and work files (see CLAUDE.md)
+reference/
+variants/
+Design/
+screenshots/
+shots/
+*_NOTES.md
+WORK_LOG.md
+session-log.md
+
+# Tools
+.claude/
+.agents/
+.playwright/
+.playwright-cli/
+node_modules/
+
+# Secrets
+.env
+.env.*
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
